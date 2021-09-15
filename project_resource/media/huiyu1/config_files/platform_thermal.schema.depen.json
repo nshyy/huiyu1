@@ -1,0 +1,1966 @@
+{
+    "version": {
+        "SCHEMA_MAJOR": 1,
+        "SCHEMA_MINOR": 2,
+        "SCHEMA_AUX": 0
+    },
+    "configs": {
+        "XCC_WITH_AST2600": 1,
+        "XCC_WITH_PILOT4": 0
+    },
+    "common_thermal_device": {
+        "common_thermal_device_platform_info": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "ADD_MAPPING_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "ADD_MAPPING_PORT_INPUT": [
+                    "property name",
+                    "cio name/logical port"
+                ]
+            }
+        },
+        "common_thermal_device_event_status": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "ipmi_ready",
+                "post_init",
+                "post_completed",
+                "power_good",
+                "dp_ready"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {}
+        },
+        "common_thermal_device_uefi": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "op_mode",
+                "table0_enable",
+                "table0_pwm",
+                "table1_enable",
+                "table2_enable",
+                "table3_enable"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {}
+        },
+        "common_thermal_device_fpga_capabilities": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "fpga_cap"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            }
+        },
+        "common_thermal_device_ambient": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_capabilities"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ],
+                "SET_ADI_OFFSET": [
+                    "FPGA ADI offset"
+                ]
+            }
+        },
+        "common_thermal_device_pch_presence": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "'CIO name/logical port'"
+                ]
+            }
+        },
+        "common_thermal_device_pch_temperature": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_pch_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            }
+        },
+        "common_thermal_device_psu_presence": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PSU"
+            }
+        },
+        "common_thermal_device_psu_inlet": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_psu_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "inlet"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PSU"
+            }
+        },
+        "common_thermal_device_disk_drive_backplane_presence": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_BP"
+            }
+        },
+        "common_thermal_device_disk_drive_backplane_info": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_disk_drive_backplane_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "vpdid",
+                "posid",
+                "maxdrive"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_BP"
+            }
+        },
+        "common_thermal_device_disk_drive_presence": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DRIVE"
+            }
+        },
+        "common_thermal_device_disk_drive_info": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_disk_drive_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "type"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DRIVE"
+            }
+        },
+        "common_thermal_device_disk_drive_temp": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_disk_drive_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DRIVE"
+            }
+        },
+        "common_thermal_device_disk_drive_quantity": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_disk_drive_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "quantity"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DRIVE_GROUP"
+            }
+        },
+        "common_thermal_device_disk_drive_quantity_mask_30": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_disk_drive_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "quentity_mask_overflow",
+                "quentity_mask"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {}
+        },
+        "common_thermal_device_cpuvr": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_capabilities"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ],
+                "SET_ADI_OFFSET": [
+                    "FPGA ADI offset"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU_VR",
+                "QUANTITY": "MAX_CPU"
+            }
+        },
+        "common_thermal_device_dimmvr": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_capabilities"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ],
+                "SET_ADI_OFFSET": [
+                    "FPGA ADI offset"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DIMM_VR",
+                "QUANTITY": "MAX_CPU"
+            }
+        },
+        "common_thermal_device_powervr": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_capabilities"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ],
+                "SET_ADI_OFFSET": [
+                    "FPGA ADI offset"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_MB_VR",
+                "QUANTITY": "MAX_CPU"
+            }
+        },
+        "common_thermal_device_cpuvr_vccin": {
+            "DEPRECATED": true,
+            "MOVETO": "common_thermal_device_cpuvr",
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_capabilities"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "vccin"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ],
+                "SET_ADI_OFFSET": [
+                    "FPGA ADI offset"
+                ]
+            }
+        },
+        "common_thermal_device_cpuvr_vccio": {
+            "DEPRECATED": true,
+            "MOVETO": "common_thermal_device_cpuvr",
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_capabilities"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "vccio"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ],
+                "SET_ADI_OFFSET": [
+                    "FPGA ADI offset"
+                ]
+            }
+        },
+        "common_thermal_device_cpu_agent_amd": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU",
+                "FEATURE": "FEATURE_CPU_AMD"
+            }
+        },
+        "common_thermal_device_cpu_agent_intel": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU",
+                "FEATURE": "FEATURE_CPU_INTEL"
+            }
+        },
+        "common_thermal_device_fpga_cpu_info": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "fpga_cpu_info"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            }
+        },
+        "common_thermal_device_cpu_disabled": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_cpu_info"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "disabled"
+            ],
+            "PRIVATE": [
+            ],
+            "PRIVATE_DESC": {
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        },
+        "common_thermal_device_cpu_presence": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fpga_cpu_info"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [
+            ],
+            "PRIVATE_DESC": {
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        },
+        "common_thermal_device_cpu_channel": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status",
+                    "common_thermal_device_cpu_presence",
+                    "common_thermal_device_cpu_disabled"
+                ],
+                "ONEOF": [
+                    "common_thermal_device_cpu_agent_intel",
+                    "common_thermal_device_cpu_agent_amd"
+                ]
+            },
+            "DAO_PREFIX": [
+                "actived"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        },
+        "common_thermal_device_cpu_info": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_cpu_channel"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "family",
+                "type",
+                "power",
+                "energy",
+                "tjmax",
+                "tdp",
+                "cores"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        },
+        "common_thermal_device_cpu_temperature": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_cpu_channel"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "relative",
+                "absolute",
+                "margin"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        },
+        "common_thermal_device_cpu_power": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_cpu_channel"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "average_power",
+                "average_power_ratio"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        },
+        "common_thermal_device_ipmi_out_cpu": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_cpu_temperature"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "sdr_output",
+                "tcontrol",
+                "tcritical",
+                "tnonrecoverable"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        },
+        "common_thermal_device_dimm_presence": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DIMM"
+            }
+        },
+        "common_thermal_device_dimm_channel": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_cpu_channel",
+                    "common_thermal_device_dimm_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "channel",
+                "active",
+                "index_size"
+            ],
+            "PRIVATE": [
+                "SET_NUM"
+            ],
+            "PRIVATE_DESC": {
+                "SET_NUM": [
+                    "DIMM channel number(start from 1)."
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DIMM_CHANNEL"
+            }
+        },
+        "common_thermal_device_dimm_temperature": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_dimm_channel"
+                ],
+                "ONEOF": {}
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_NUM"
+            ],
+            "PRIVATE_DESC": {
+                "SET_NUM": [
+                    "DIMM instance number(start from 1); only 1 or 2."
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DIMM"
+            }
+        },
+        "common_thermal_device_dimm_info": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_dimm_presence"
+                ],
+                "ONEOF": {}
+            },
+            "DAO_PREFIX": [
+                "type",
+                "capacity"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_DIMM"
+            }
+        },
+        "common_thermal_device_pci_agent_nvidia": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_NUM"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ],
+                "SET_NUM": [
+                    "gpu core number"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVIDIA_AGENT"
+            }
+        },
+        "common_thermal_device_pci_agent_nvmemi": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVMEMI"
+            }
+        },
+        "common_thermal_device_pci_agent_xilinx": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_XILINX"
+            }
+        },
+        "common_thermal_device_pci_support_nvidia": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "supported",
+                "actived"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVIDIA"
+            }
+        },
+        "common_thermal_device_pci_support_nvmemi": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVMEMI"
+            }
+        },
+        "common_thermal_device_pci_support_xilinx": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "supported",
+                "actived"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_XILINX"
+            }
+        },
+        "common_thermal_device_pci_request_nvidia_capability": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_pci_agent_nvidia",
+                    "common_thermal_device_pci_support_nvidia"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "support_core1_temp",
+                "support_core2_temp",
+                "support_core3_temp",
+                "support_core4_temp",
+                "support_hbm_temp",
+                "cap0",
+                "cap1",
+                "cap2"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVIDIA"
+            }
+        },
+        "common_thermal_device_pci_request_nvidia_temperature": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_pci_request_nvidia_capability",
+                    "common_thermal_device_pci_agent_nvidia",
+                    "common_thermal_device_pci_support_nvidia",
+                    "common_thermal_device_pci_slot"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "core1_temperature",
+                "core2_temperature",
+                "core3_temperature",
+                "core4_temperature",
+                "high_temperature"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVIDIA"
+            }
+        },
+        "common_thermal_device_pci_request_nvidia_power": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_pci_request_nvidia_capability",
+                    "common_thermal_device_pci_agent_nvidia",
+                    "common_thermal_device_pci_support_nvidia",
+                    "common_thermal_device_pci_slot"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "power"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVIDIA"
+            }
+        },
+        "common_thermal_device_pci_request_nvmemi_temperature": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_pci_agent_nvmemi",
+                    "common_thermal_device_pci_support_nvmemi",
+                    "common_thermal_device_pci_slot"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_NVMEMI"
+            }
+        },
+        "common_thermal_device_pci_support_pldm" : {
+           "REQUIRED" : {
+              "ONEOF" : [],
+              "ALLOF" : [
+                 "common_thermal_device_event_status"
+              ]
+           },
+           "PRIVATE" : [],
+           "PRIVATE_DESC" : {},
+           "DAO_PREFIX" : [
+              "supported",
+              "actived"
+           ],
+           "PLATFORM": {
+               "DEVICE_TYPE": "DEVICE_PLDM"
+           }
+        },
+        "common_thermal_device_pci_agent_pldm" : {
+           "REQUIRED" : {
+              "ONEOF" : [],
+              "ALLOF" : [
+                 "common_thermal_device_event_status"
+              ]
+           },
+           "PRIVATE" : [
+              "SET_PORT_INPUT",
+              "SET_NUM"
+           ],
+           "PRIVATE_DESC" : {
+              "COMMENT" : [
+                 "1=READY 2=NOCHANGE 3=NONCRITICAL 4=CRITICAL 5=FATAL"
+              ],
+              "SET_PORT_INPUT" : [
+                 "CIO name/logical port"
+              ],
+              "SET_NUM" : [
+                 "the status index"
+              ]
+           },
+           "DAO_PREFIX" : [],
+           "PLATFORM": {
+               "DEVICE_TYPE": "DEVICE_AGENT_PLDM"
+           }
+        },
+        "common_thermal_device_pci_request_pldm_status" : {
+           "REQUIRED" : {
+              "ONEOF" : [],
+              "ALLOF" : [
+                 "common_thermal_device_pci_agent_pldm",
+                 "common_thermal_device_pci_support_pldm"
+              ]
+           },
+           "PRIVATE" : [],
+           "PRIVATE_DESC" : {},
+           "DAO_PREFIX" : [
+              "status"
+           ],
+           "PLATFORM": {
+               "DEVICE_TYPE": "DEVICE_PLDM"
+           }
+        },
+        "common_thermal_device_pci_info": {
+            "DEPRECATED": true,
+            "MOVETO": "common_thermal_device_uefi",
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PCI"
+            }
+        },
+        "common_thermal_device_pci_slot_presence": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PCI"
+            }
+        },
+        "common_thermal_device_pci_slot": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_uefi",
+                    "common_thermal_device_pci_support_nvidia",
+                    "common_thermal_device_pci_support_nvmemi"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "location",
+                "slot_no",
+                "presence",
+                "vid",
+                "did",
+                "svid",
+                "sdid",
+                "classcode",
+                "max_tdp"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PCI"
+            }
+        },
+        "common_thermal_device_fan_pwm": {
+            "DEPRECATED": true,
+            "MOVETO": "common_thermal_device_fan_pwm_fpga",
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "zone_index",
+                "fan_index",
+                "pwm_index",
+                "adi_offset"
+            ],
+            "PRIVATE": [
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_ADI_OFFSET": [
+                    "zone index",
+                    "fan index",
+                    "pwm index"
+                ]
+            }
+        },
+        "common_thermal_device_fan_pwm_fpga": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "zone_index",
+                "fan_index",
+                "pwm_index",
+                "adi_offset"
+            ],
+            "PRIVATE": [
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_ADI_OFFSET": [
+                    "zone index",
+                    "fan index",
+                    "pwm index"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PWM"
+            }
+        },
+        "common_thermal_device_fan_pwm_psu": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "last_pwm",
+                "expected_pwm"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PSU"
+            }
+        },
+        "common_thermal_device_fan_pwm_smm": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "pwm_input",
+                "pwm_output"
+            ],
+            "PRIVATE": ["SET_PORT_INPUT"],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "FEATURE": "UNKNOWN",
+                "DEVICE_TYPE": "DEVICE_PWM"
+            }
+        },
+        "common_thermal_device_fan_tach_fpga": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "zone_index",
+                "fan_index",
+                "tach_index",
+                "adi_offset"
+            ],
+            "PRIVATE": [
+                "SET_ADI_OFFSET"
+            ],
+            "PRIVATE_DESC": {
+                "SET_ADI_OFFSET": [
+                    "zone index",
+                    "fan index",
+                    "tach index"
+                ]
+            },
+            "PLATFORM": {
+                "FEATURE": "FEATURE_TACH_FPGA",
+                "DEVICE_TYPE": "DEVICE_FAN"
+            }
+        },
+        "common_thermal_device_fan_tach_xcc": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "tach",
+                "fan_index",
+                "tach_channel_no",
+                "mux",
+                "gpio_port_1",
+                "gpio_pin_1",
+                "gpio_port_2",
+                "gpio_pin_2"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT",
+                "SET_NUM"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "logical port"
+                ],
+                "SET_NUM": [
+                    "TACH channel number",
+                    "MUX number:0, 1, 2, 3",
+                    "GPIO port 1",
+                    "GPIO pin 1",
+                    "GPIO port 2",
+                    "GPIO pin 2"
+                ]
+            },
+            "PLATFORM": {
+                "FEATURE": "FEATURE_TACH_XCC",
+                "DEVICE_TYPE": "DEVICE_FAN"
+            }
+        },
+        "common_thermal_device_fan_tach_psu": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_PSU"
+            }
+        },
+        "common_thermal_device_fan_tach_smm": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "FEATURE": "UNKNOWN",
+                "DEVICE_TYPE": "DEVICE_PWM"
+            }
+        },
+        "common_thermal_device_fan": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": [],
+                "TWOOF": [
+                    [
+                        "common_thermal_device_fan_tach_fpga",
+                        "common_thermal_device_fan_tach_xcc",
+                        "common_thermal_device_fan_tach_psu",
+                        "common_thermal_device_fan_tach_smm"
+                    ],
+                    [
+                        "common_thermal_device_fan_pwm_fpga",
+                        "common_thermal_device_fan_pwm_psu",
+                        "common_thermal_device_fan_pwm_smm"
+                    ]
+                ]
+            },
+            "DAO_PREFIX": [
+                "tach",
+                "pwm"
+            ],
+            "PRIVATE": [],
+            "PRIVATE_DESC": {},
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_FAN"
+            }
+        },
+        "common_thermal_device_fpga_fan_info": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "fpga_fan_info",
+                "num_of_fanzone",
+                "fans_per_pwm",
+                "tachs_per_fan",
+                "total_fans"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            }
+        },
+        "common_thermal_device_fan_control": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_fan"
+                ],
+                "ONEOF": [
+                    "common_thermal_device_fpga_fan_info"
+                ]
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port, empty string for HD system."
+                ]
+            }
+        },
+        "common_thermal_device_retimer_presence": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_RETIMER"
+            }
+        },
+        "common_thermal_device_retimer_temp": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_retimer_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_RETIMER"
+            }
+        },
+        "common_thermal_device_raidcard_presence": {
+            "REQUIRED": {
+                "ALLOF": [],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "presence"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_RAIDLINK"
+            }
+        },
+        "common_thermal_device_raidcard_temp": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_raidcard_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_RAIDLINK"
+            }
+        },
+        "common_thermal_device_raidcard_battery": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_raidcard_presence"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "temperature"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_RAIDLINK"
+            }
+        },
+        "common_thermal_device_sdr_map": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_event_status"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [],
+            "PRIVATE": [
+                "ADD_MAPPING_PORT_OUTPUT"
+            ],
+            "PRIVATE_DESC": {
+                "ADD_MAPPING_PORT_OUTPUT": ["map_key", "port_key", "formula_m", "formula_b", "formula_k2"]
+            }
+        },
+        "common_thermal_device_cpu_throttle": {
+            "REQUIRED": {
+                "ALLOF": [
+                    "common_thermal_device_cpu_channel"
+                ],
+                "ONEOF": []
+            },
+            "DAO_PREFIX": [
+                "fpga_data",
+                "throttle_reason"
+            ],
+            "PRIVATE": [
+                "SET_PORT_INPUT"
+            ],
+            "PRIVATE_DESC": {
+                "SET_PORT_INPUT": [
+                    "CIO name/logical port"
+                ]
+            },
+            "PLATFORM": {
+                "DEVICE_TYPE": "DEVICE_CPU"
+            }
+        }
+    },
+    "common_thermal_algorithm": {
+        "common_thermal_algorithm_cubic_equation": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [
+                        "X",
+                        "A",
+                        "B",
+                        "C",
+                        "D",
+                        "R_MAX"
+                    ],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "A": {
+                        "TYPE": "NUMBER"
+                    },
+                    "B": {
+                        "TYPE": "NUMBER"
+                    },
+                    "C": {
+                        "TYPE": "NUMBER"
+                    },
+                    "D": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MAX": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "FAN_MAP"
+            ]
+        },
+        "common_thermal_algorithm_pid": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [
+                        "X",
+                        "Y",
+                        "X_TARGET_HI",
+                        "X_TARGET_LO",
+                        "X_KP",
+                        "X_KI",
+                        "X_KD",
+                        "R_MAX"
+                    ],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "Y": {
+                        "TYPE": "DAO"
+                    },
+                    "X_TARGET_HI": {
+                        "TYPE": "NUMBER"
+                    },
+                    "X_TARGET_LO": {
+                        "TYPE": "NUMBER"
+                    },
+                    "X_KP": {
+                        "TYPE": "NUMBER"
+                    },
+                    "X_KI": {
+                        "TYPE": "NUMBER"
+                    },
+                    "X_KD": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MAX": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "FAN_MAP"
+            ]
+        },
+        "common_thermal_algorithm_threshold": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "Y": {
+                        "TYPE": "DAO"
+                    },
+                    "X_TCONTROL": {
+                        "TYPE": "NUMBER"
+                    },
+                    "X_TCRITICAL": {
+                        "TYPE": "NUMBER"
+                    },
+                    "X_GUARD_BAND": {
+                        "TYPE": "NUMBER"
+                    },
+                    "X_INCREMENTAL": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MAX": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "FAN_MAP"
+            ]
+        },
+        "common_thermal_algorithm_sdr_map": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "MAP_KEY": {
+                        "TYPE": "STRING"
+                    }
+                }
+            },
+            "ACTION": [
+                "SDR_MAP"
+            ]
+        },
+        "common_thermal_algorithm_sensor_capping_cpu": {
+            "DEPRECATED": true,
+            "MOVETO": "common_thermal_algorithm_sensor_capping_cpu_percentage",
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "XY": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "X": {
+                                "TYPE": "DAO"
+                            },
+                            "Y": {
+                                "TYPE": "DAO"
+                            }
+                        }
+                    },
+                    "PERCENTAGE": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MIN": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "CAP_CPU"
+            ]
+        },
+        "common_thermal_algorithm_sensor_capping_cpu_percentage": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "XY": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "X": {
+                                "TYPE": "DAO"
+                            },
+                            "Y": {
+                                "TYPE": "DAO"
+                            }
+                        }
+                    },
+                    "PERCENTAGE": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MIN": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "CAP_CPU"
+            ]
+        },
+        "common_thermal_algorithm_sensor_capping_cpu_constant": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "X": {
+                                "TYPE": "DAO"
+                            }
+                        }
+                    },
+                    "PER_CPU_WATT": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MIN": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "CAP_CPU"
+            ]
+        },
+        "common_thermal_algorithm_sensor_capping_dimm": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "X": {
+                                "TYPE": "DAO"
+                            }
+                        }
+                    },
+                    "PER_DIMM_WATT": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MIN": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "CAP_DIMM"
+            ]
+        },
+        "common_thermal_algorithm_sensor_capping_system": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "X": {
+                                "TYPE": "DAO"
+                            }
+                        }
+                    },
+                    "PERCENTAGE": {
+                        "TYPE": "NUMBER"
+                    },
+                    "R_MIN": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "CAP_SYSTEM"
+            ]
+        },
+        "common_thermal_algorithm_support_list_pci_pid": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "T": {
+                        "TYPE": "DAO"
+                    },
+                    "F": {
+                        "TYPE": "DAO"
+                    },
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "Y": {
+                        "TYPE": "DAO"
+                    },
+                    "Z": {
+                        "TYPE": "DAO"
+                    },
+                    "XYZPID": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "X": {
+                                "TYPE": "NUMBER"
+                            },
+                            "Y": {
+                                "TYPE": "NUMBER"
+                            },
+                            "Z": {
+                                "TYPE": "NUMBER"
+                            },
+                            "KP": {
+                                "TYPE": "NUMBER"
+                            },
+                            "KI": {
+                                "TYPE": "NUMBER"
+                            },
+                            "KD": {
+                                "TYPE": "NUMBER"
+                            },
+                            "HI": {
+                                "TYPE": "NUMBER"
+                            },
+                            "LO": {
+                                "TYPE": "NUMBER"
+                            },
+                            "R_MAX": {
+                                "TYPE": "NUMBER"
+                            }
+                        }
+                    }
+                }
+            },
+            "ACTION": [
+                "FAN_MAP"
+            ]
+        },
+        "common_thermal_algorithm_support_list_pci_tier": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "T": {
+                        "TYPE": "DAO"
+                    },
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "Y": {
+                        "TYPE": "DAO"
+                    },
+                    "Z": {
+                        "TYPE": "DAO"
+                    },
+                    "TXYZABCD": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "TMIN": {
+                                "TYPE": "NUMBER"
+                            },
+                            "TMAX": {
+                                "TYPE": "NUMBER"
+                            },
+                            "X": {
+                                "TYPE": "NUMBER"
+                            },
+                            "Y": {
+                                "TYPE": "NUMBER"
+                            },
+                            "Z": {
+                                "TYPE": "NUMBER"
+                            },
+                            "A": {
+                                "TYPE": "NUMBER"
+                            },
+                            "B": {
+                                "TYPE": "NUMBER"
+                            },
+                            "C": {
+                                "TYPE": "NUMBER"
+                            },
+                            "D": {
+                                "TYPE": "NUMBER"
+                            },
+                            "R_MAX": {
+                                "TYPE": "NUMBER"
+                            }
+                        }
+                    }
+                }
+            },
+            "ACTION": [
+                "FAN_MAP"
+            ]
+        },
+        "common_thermal_algorithm_support_list": {
+            "DEPRECATED": true,
+            "MOVETO": "common_thermal_algorithm_support_list_pci_tier",
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "Y": {
+                        "TYPE": "DAO"
+                    },
+                    "Z": {
+                        "TYPE": "DAO"
+                    },
+                    "ABCD": {
+                        "TYPE": "ARRAY",
+                        "FIELDS": {
+                            "A": {
+                                "TYPE": "NUMBER"
+                            },
+                            "B": {
+                                "TYPE": "NUMBER"
+                            },
+                            "C": {
+                                "TYPE": "NUMBER"
+                            },
+                            "D": {
+                                "TYPE": "NUMBER"
+                            }
+                        }
+                    }
+                }
+            },
+            "ACTION": [
+                "SUPPORT_PCI_LIST"
+            ]
+        },
+        "common_thermal_algorithm_log": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "X": {
+                        "TYPE": "DAO"
+                    },
+                    "RECORD_MAX": {
+                        "TYPE": "NUMBER"
+                    },
+                    "FILE_MAX": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "FILE_LOG"
+            ]
+        },
+        "common_thermal_algorithm_config_spike": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF": []
+                },
+                "FIELDS": {
+                    "SPIKE_TARGET": {
+                        "TYPE": "DAO"
+                    },
+                    "SPIKE_MAX": {
+                        "TYPE": "NUMBER"
+                    },
+                    "SPIKE_CRITICAL": {
+                        "TYPE": "NUMBER"
+                    }
+                }
+            },
+            "ACTION": [
+                "DEVICE_CONFIG"
+            ]
+        },
+        "common_thermal_algorithm_config_spike_pci_list": {
+            "PARAMETERS": {
+                "REQUIRED": {
+                    "ALLOF": [],
+                    "ONEOF":[]
+                },
+                "FIELDS": {
+                    "SPIKE_TARGET": {
+                        "TYPE":"DAO"
+                    },
+                    "X": {
+                        "TYPE":"DAO"
+                    },
+                    "Y": {
+                        "TYPE":"DAO"
+                    },
+                    "Z": {
+                        "TYPE":"DAO"
+                    },
+                    "XYZSPIKE": {
+                        "TYPE": "ARRAY", 
+                        "FIELDS": {
+                            "X": {
+                                "TYPE":"NUMBER"
+                            },
+                            "Y": {
+                                "TYPE":"NUMBER"
+                            },
+                            "Z": {
+                                "TYPE":"NUMBER"
+                            },
+                            "SPIKE_MAX": {
+                                "TYPE":"NUMBER"
+                            },
+                            "SPIKE_CRITICAL": {
+                                "TYPE":"NUMBER"
+                            }
+                        }
+                    }
+                }
+            },
+            "ACTION": [
+                "DEVICE_CONFIG"
+            ]
+        }
+    }
+}
